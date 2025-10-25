@@ -97,7 +97,7 @@ return new
                 float drawHeight = imgHeight * scale;
                 float x = (pageWidth - drawWidth) / 2;
                 float y = (pageHeight - drawHeight) / 2;
-                con.drawImage(pdobj,x,y,pdobj.getHeight()*scale,pdobj.getWidth()*scale);
+                con.drawImage(pdobj,y,x,pdobj.getHeight()*scale,pdobj.getWidth()*scale);
                 con.close();
 
             }
@@ -116,6 +116,7 @@ return new
         }
     }
 }
+
 
 
 
