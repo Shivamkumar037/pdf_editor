@@ -80,26 +80,19 @@ return new
             PDDocument document=new PDDocument();
 
             for(MultipartFile file: file_of_img){
-                PDPage page= new PDPage(PDRectangle.A4);
-                document.addPage(page);
-                PDPageContentStream con=new PDPageContentStream(document,page);
-                PDImageXObject pdobj=PDImageXObject.createFromByteArray(document,file.getBytes(),file.getOriginalFilename());
 
-                float pageWidth = page.getMediaBox().getWidth();
-                float pageHeight = page.getMediaBox().getHeight();
 
-                float imgWidth = pdobj.getWidth();
-                float imgHeight = pdobj.getHeight();
-                float scaleX = pageWidth / imgWidth;
-                float scaleY = pageHeight / imgHeight;
-                float scale = Math.min(scaleX, scaleY) * 0.9f;
-                float drawWidth = imgWidth * scale;
-                float drawHeight = imgHeight * scale;
-                float x = (pageWidth - drawWidth) / 2;
-                float y = (pageHeight - drawHeight) / 2;
-                con.drawImage(pdobj,y,x,pdobj.getHeight()*scale,pdobj.getWidth()*scale);
+ PDImageXObject pdobj=PDImageXObject.createFromByteArray(document,file.getBytes(),file.getOriginalFilename());
+float height=pdobj.getHeight();
+float width= pdobj.getWidth();
+PDRectangle shape= new PDRectangle(width,height);
+PDPage page=new PDPage(shape);
+document.addPage(page);
+PDPageContentStream con= new PDPageContentStream(document,page);
+con.drawImage(pdobj,0,0,width,height);
+
                 con.close();
-
+                
             }
             ByteArrayOutputStream outputStream= new ByteArrayOutputStream();
             document.save(outputStream);
@@ -116,6 +109,7 @@ return new
         }
     }
 }
+
 
 
 
