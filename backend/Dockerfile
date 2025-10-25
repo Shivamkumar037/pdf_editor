@@ -1,10 +1,10 @@
-﻿FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
 COPY . .
 
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw.cmd clean package -DskipTests
 
 ENV PORT=8080
 EXPOSE 8080
