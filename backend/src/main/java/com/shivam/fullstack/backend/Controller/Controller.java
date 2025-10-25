@@ -34,7 +34,7 @@ public class Controller {
 
      } catch (Exception e) {
          HttpHeaders headers=new HttpHeaders();
-         headers.setLocation(URI.create("http"));
+         headers.setLocation(URI.create("https://pdeditor1.netlify.app/html/error"));
          return new  ResponseEntity<>(headers,HttpStatus.SEE_OTHER);
      }
 
@@ -51,7 +51,7 @@ public class Controller {
         } catch (Exception e) {
 
             HttpHeaders headers=new HttpHeaders();
-            headers.setLocation(URI.create("http"));
+            headers.setLocation(URI.create("https://pdeditor1.netlify.app/html/error"));
             return new  ResponseEntity<>(headers,HttpStatus.SEE_OTHER);
 
 
@@ -67,7 +67,7 @@ try{
 
 } catch (Exception e) {
     HttpHeaders headers=new HttpHeaders();
-    headers.setLocation(URI.create("http"));
+    headers.setLocation(URI.create("https://pdeditor1.netlify.app/html/error"));
   return new  ResponseEntity<>(headers,HttpStatus.SEE_OTHER);
 
 }
@@ -76,3 +76,4 @@ try{
 
     }
 }
+
