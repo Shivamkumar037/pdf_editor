@@ -37,6 +37,8 @@ try{
        byte[] userdata=outputStream.toByteArray();
 
     HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("https://pdeditor1.netlify.app/html/download-doc"));
+
     headers.setContentType(MediaType.APPLICATION_PDF);
     document.close();
     headers.setContentDisposition(ContentDisposition.builder("attachment").filename("update.pdf").build());
@@ -61,6 +63,8 @@ return new
 
             byte[] userdata=outputStream.toByteArray();
             HttpHeaders headers = new HttpHeaders();
+                headers.setLocation(URI.create("https://pdeditor1.netlify.app/html/download-doc"));
+
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDisposition(ContentDisposition.builder("attachment").filename("update.pdf").build());
             return new
@@ -88,6 +92,8 @@ return new
             byte[] userdata=outputStream.toByteArray();
             document.close();
             HttpHeaders header= new HttpHeaders();
+                header.setLocation(URI.create("https://pdeditor1.netlify.app/html/download-doc"));
+
             header.setContentType(MediaType.APPLICATION_PDF);
             header.setContentDisposition(ContentDisposition.builder("attachment").filename("img_to_pdf.pdf").build());
             return  new ResponseEntity<>(userdata,header,HttpStatus.OK);
@@ -96,3 +102,4 @@ return new
         }
     }
 }
+
