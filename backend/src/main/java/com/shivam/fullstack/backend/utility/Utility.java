@@ -75,16 +75,29 @@ return new
         }
 
     }
-    public ResponseEntity<byte[]> img_to_pdf(List<MultipartFile> file_of_img) throws Exception{
+  public ResponseEntity<byte[]> img_to_pdf(List<MultipartFile> file_of_img) throws Exception{
         try {
             PDDocument document=new PDDocument();
-            float scale = 0.5f;
+
             for(MultipartFile file: file_of_img){
                 PDPage page= new PDPage(PDRectangle.A4);
                 document.addPage(page);
                 PDPageContentStream con=new PDPageContentStream(document,page);
                 PDImageXObject pdobj=PDImageXObject.createFromByteArray(document,file.getBytes(),file.getOriginalFilename());
-                con.drawImage(pdobj,50,200,pdobj.getHeight()*scale,pdobj.getWidth()*scale);
+
+                float pageWidth = page.getMediaBox().getWidth();
+                float pageHeight = page.getMediaBox().getHeight();
+
+                float imgWidth = pdobj.getWidth();
+                float imgHeight = pdobj.getHeight();
+                float scaleX = pageWidth / imgWidth;
+                float scaleY = pageHeight / imgHeight;
+                float scale = Math.min(scaleX, scaleY) * 0.9f;
+                float drawWidth = imgWidth * scale;
+                float drawHeight = imgHeight * scale;
+                float x = (pageWidth - drawWidth) / 2;
+                float y = (pageHeight - drawHeight) / 2;
+                con.drawImage(pdobj,x,y,pdobj.getHeight()*scale,pdobj.getWidth()*scale);
                 con.close();
 
             }
@@ -103,5 +116,6 @@ return new
         }
     }
 }
+
 
 
