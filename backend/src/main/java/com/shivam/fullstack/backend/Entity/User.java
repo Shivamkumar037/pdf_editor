@@ -1,0 +1,18 @@
+package com.shivam.fullstack.backend.Entity;
+// User.java
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String username;
+    private String mobile;
+
+    // getters and setters
+}
+
+// Product.java
