@@ -1,27 +1,27 @@
 package com.shivam.fullstack.backend.Controller;
 
-import com.shivam.fullstack.backend.Entity.User;
-import com.shivam.fullstack.backend.Repositories.UserRepository;
+import com.shivam.fullstack.backend.Entity.Product;
+import com.shivam.fullstack.backend.Repositories.ProductRepository;
 import org.springframework.web.bind.annotation.*; // Isme CrossOrigin bhi aa jata hai
 import java.util.List;
 
 @RestController
-@RequestMapping("/userdata")
+@RequestMapping("/productdata")
 @CrossOrigin(origins = "*") // <--- YE LINE ADD KI HAI (CORS Fix)
-public class UserController {
-    private final UserRepository repo;
+public class ProductController {
+    private final ProductRepository repo;
 
-    public UserController(UserRepository repo) {
+    public ProductController(ProductRepository repo) {
         this.repo = repo;
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return repo.save(user);
+    public Product createProduct(@RequestBody Product product) {
+        return repo.save(product);
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<Product> getProducts() {
         return repo.findAll();
     }
 }
