@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/productdata")
+@CrossOrigin(origins = "*") // <--- यह लाइन सबसे जरूरी है (This fixes the issue)
 public class ProductController {
 
     private final ProductRepository repo;
@@ -23,7 +24,6 @@ public class ProductController {
         this.repo = repo;
         this.cloudinary = cloudinary;
     }
-
 
     // Create Product with Image Upload
     @PostMapping(consumes = {"multipart/form-data"})
@@ -51,7 +51,12 @@ public class ProductController {
         Product p = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        cloudinary.uploader().destroy(p.getPublicId(), ObjectUtils.emptyMap());
+        // Cloudinary se delete karein (Error handling ke liye check kar sakte hain)
+        try {
+            cloudinary.uploader().destroy(p.getPublicId(), ObjectUtils.emptyMap());
+        } catch (Exception e) {
+            System.err.println("Image delete failed: " + e.getMessage());
+        }
 
         repo.delete(p);
         return ResponseEntity.ok("Product & Image Deleted Successfully");
