@@ -2,11 +2,6 @@ package com.shivam.fullstack.backend.Entity;
 
 import jakarta.persistence.*;
 
-/**
- * Entity class representing a User in the database.
- * Updated to include Gmail, Balance, and Tasks Completed fields for GMR Service,
- * with appropriate default initializations.
- */
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,21 +9,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // These fields will be provided by the user during registration
     private String username;
+
+    // Mobile number unique hona chahiye taaki hum ise primary identifier maan sakein
+    @Column(unique = true)
     private String mobile;
 
-    // Defaulting to null (explicitly for clarity, though Java default)
-    private String gmail = null;
+    private String gmail;
 
-    // Defaulting balance to 0.0
+    // Default balance 0.0 set kiya gaya hai new users ke liye
     private Double balance = 0.0;
 
-    // Defaulting tasks completed count to 0
-    private int tasksCompleted = 0;
+    // Default constructor
+    public User() {
+    }
 
-    // --- Getters and Setters ---
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -53,7 +49,6 @@ public class User {
     public String getGmail() {
         return gmail;
     }
-
     public void setGmail(String gmail) {
         this.gmail = gmail;
     }
@@ -61,16 +56,7 @@ public class User {
     public Double getBalance() {
         return balance;
     }
-
     public void setBalance(Double balance) {
         this.balance = balance;
-    }
-
-    public int getTasksCompleted() {
-        return tasksCompleted;
-    }
-
-    public void setTasksCompleted(int tasksCompleted) {
-        this.tasksCompleted = tasksCompleted;
     }
 }
